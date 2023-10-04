@@ -3,19 +3,13 @@
              xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
     <persistence-unit name="hello">
-        <class>org.example.model.Member</class>
-
         <properties>
             <!-- 필수 속성 -->
             <property name="javax.persistence.jdbc.driver" value="org.mariadb.jdbc.Driver"/>
             <property name="javax.persistence.jdbc.user" value="user1"/>
             <property name="javax.persistence.jdbc.password" value="1111"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:mariadb://localhost:3306/jpa-study"/>
-<!--            <property name="hibernate.dialect" value="org.hibernate.dialect.MariaDBDialect"/>-->
-
-<!--            <property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.SunOneJtaPlatform" />-->
-            <property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.JBossStandAloneJtaPlatform" />
-
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MariaDBDialect"/>
 
             <!-- 옵션 -->
             <property name="hibernate.show_sql" value="true"/>
