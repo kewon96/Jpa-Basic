@@ -6,6 +6,7 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import org.example.model.Member;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class Main {
@@ -24,10 +25,14 @@ public class Main {
             // JPA에서는 Transaction을 굉장히 중요하게 다룬다.
             // 데이터를 저장하는 행위에 있어서는 반드시 Transaction 안에서 처리되어야한다.
 
-            // insert(manager);
+//             insert(manager);
 //            update(manager);
 
 //            List<Member> resultList = getMembers(manager);
+
+//            cache_1_dept(manager);
+//            lazyTransaction(manager,tx);
+            dirtyChecking(manager);
 
             tx.commit();
         } catch(Exception e) {
@@ -37,6 +42,41 @@ public class Main {
         }
 
         factory.close();
+    }
+
+    private static void dirtyChecking(EntityManager manager) {
+        // 89374
+
+        Member member = manager.find(Member.class, 89374L);
+        System.out.println(member);
+
+        member.setName("ZZZZZ");
+
+    }
+
+    private static void lazyTransaction(EntityManager manager, EntityTransaction tx) {
+        //엔티티 매니저는 데이터 변경시 트랜잭션을 시작해야 한다.
+        manager.persist(Member.random());
+        manager.persist(Member.random());
+        //여기까지 INSERT SQL을 데이터베이스에 보내지 않는다.
+        //커밋하는 순간 데이터베이스에 INSERT SQL을 보낸다.
+    }
+
+    private static void cache_1_dept(EntityManager manager) {
+//        Member member = new Member();
+//        member.setId(3L);
+//        member.setName("회원1");
+//        //1차 캐시에 저장됨
+//        manager.persist(member);
+
+        //1차 캐시에서 조회
+        Member findMember1 = manager.find(Member.class, 3L);
+        Member findMember2 = manager.find(Member.class, 3L);
+        System.out.println(findMember1);
+        System.out.println(findMember2);
+
+        System.out.println(findMember1 == findMember2);
+
     }
 
     private static List<Member> getMembers(EntityManager manager) {
@@ -60,7 +100,7 @@ public class Main {
     }
 
     private static void insert(EntityManager manager) {
-        Member member = new Member(2L, "helloB");
+        Member member = new Member(4L, "회원1", LocalDateTime.now());
         manager.persist(member);
     }
 }
