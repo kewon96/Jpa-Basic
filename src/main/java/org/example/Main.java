@@ -32,7 +32,11 @@ public class Main {
 
 //            cache_1_dept(manager);
 //            lazyTransaction(manager,tx);
-            dirtyChecking(manager);
+//            dirtyChecking(manager);
+
+//            randomMember(manager);
+
+            detachMember(manager);
 
             tx.commit();
         } catch(Exception e) {
@@ -42,6 +46,21 @@ public class Main {
         }
 
         factory.close();
+    }
+
+    private static void detachMember(EntityManager manager) {
+        Member member = manager.find(Member.class, 90651L);
+        member.setName("asf,flbj");
+
+        manager.detach(member);
+
+        Member member1 = manager.find(Member.class, 90651L);
+        member1.setName("asf,flbj");
+
+    }
+
+    private static void randomMember(EntityManager manager) {
+        manager.persist(Member.random());
     }
 
     private static void dirtyChecking(EntityManager manager) {
