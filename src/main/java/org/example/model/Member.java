@@ -4,19 +4,37 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.LinkedList;
 import java.util.Random;
 
 
 // JPA 내부적으로 리플렉션을 쓰기때문에 기본생성자가 있어야한다.(public일 필요는 없음)
 @Entity
 @Table(name="member")
+@SequenceGenerator(
+        name = "member_seq_generator",
+        sequenceName = "member_seq",
+        initialValue = 1,
+        allocationSize = 50
+)
+//@TableGenerator(
+//        name = "member_seq_generator",
+//        table = "member_sequence",
+//        pkColumnValue = "member_seq",
+//        allocationSize = 1
+//)
 @Getter @Setter @NoArgsConstructor
 @AllArgsConstructor @ToString
 @Builder
 public class Member {
+
     @Id // 최소한 Key가 무엇인지 알려줘야한다.
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "member_seq_generator")
+//    @GeneratedValue(strategy = GenerationType.TABLE, generator = "member_seq_generator")
     private Long id;
 
+    @Id
     private String name;
 
     private Integer age;
@@ -24,25 +42,35 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private RoleType roleType;
 
-//    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime createdDate;
 
-//    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime lastModifiedDate;
 
     @Lob
     private String description;
 
+    public static LinkedList<Member> createMembers() {
+        LinkedList<Member> resultList = new LinkedList<>();
+
+        for(int i = 0; i < 1; i++) {
+            resultList.add(random());
+        }
+
+        return resultList;
+    }
 
     public static Member random() {
-        long id = (long) ( Math.random() * 100000 );
+        double random = Math.random();
+
+        long id = (long) ( random * 100000 );
         String name = createName();
+        int age = (int) ( random * 100);
 
         return Member.builder()
-                .id(id)
+//                .id(id + "")
                 .name(name)
                 .createdDate(LocalDateTime.now())
-                .age(50)
+                .age(age)
                 .roleType(RoleType.USER)
                 .description(String.format("%d / %s", id, name))
                 .build();

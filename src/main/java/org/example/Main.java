@@ -6,7 +6,7 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import org.example.model.Member;
 
-import java.time.LocalDateTime;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Main {
@@ -26,6 +26,7 @@ public class Main {
             // 데이터를 저장하는 행위에 있어서는 반드시 Transaction 안에서 처리되어야한다.
 
 //             insert(manager);
+             inserts(manager);
 //            update(manager);
 
 //            List<Member> resultList = getMembers(manager);
@@ -36,7 +37,7 @@ public class Main {
 
 //            randomMember(manager);
 
-            detachMember(manager);
+//            detachMember(manager);
 
             tx.commit();
         } catch(Exception e) {
@@ -119,7 +120,16 @@ public class Main {
     }
 
     private static void insert(EntityManager manager) {
-        Member member = new Member(4L, "회원1", LocalDateTime.now());
-        manager.persist(member);
+        Member random = Member.random();
+        manager.persist(random);
+    }
+
+    private static void inserts(EntityManager manager) {
+        LinkedList<Member> members = Member.createMembers();
+        System.out.println("==================");
+        members.forEach(manager::persist);
+
+        members.forEach(x -> System.out.println(x.getId()));
+        System.out.println("==================");
     }
 }
