@@ -10,7 +10,7 @@ import java.util.Random;
 
 // JPA 내부적으로 리플렉션을 쓰기때문에 기본생성자가 있어야한다.(public일 필요는 없음)
 @Entity
-@Table(name="member")
+@Table(name="member_1")
 @SequenceGenerator(
         name = "member_seq_generator",
         sequenceName = "member_seq",
@@ -26,7 +26,7 @@ import java.util.Random;
 @Getter @Setter @NoArgsConstructor
 @AllArgsConstructor @ToString
 @Builder
-public class Member {
+public class EntityMappingMember {
 
     @Id // 최소한 Key가 무엇인지 알려줘야한다.
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,8 +49,8 @@ public class Member {
     @Lob
     private String description;
 
-    public static LinkedList<Member> createMembers() {
-        LinkedList<Member> resultList = new LinkedList<>();
+    public static LinkedList<EntityMappingMember> createMembers() {
+        LinkedList<EntityMappingMember> resultList = new LinkedList<>();
 
         for(int i = 0; i < 75; i++) {
             resultList.add(random());
@@ -59,14 +59,14 @@ public class Member {
         return resultList;
     }
 
-    public static Member random() {
+    public static EntityMappingMember random() {
         double random = Math.random();
 
         long id = (long) ( random * 100000 );
         String name = createName();
         int age = (int) ( random * 100);
 
-        return Member.builder()
+        return EntityMappingMember.builder()
 //                .id(id + "")
                 .name(name)
                 .createdDate(LocalDateTime.now())
