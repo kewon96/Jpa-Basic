@@ -1,4 +1,4 @@
-package org.example.model;
+package org.example.entity_mapping.model;
 
 public enum RoleType {
     USER("USER"),

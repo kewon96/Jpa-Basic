@@ -1,4 +1,4 @@
-package org.example.model;
+package org.example.entity_mapping.model;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -30,11 +30,11 @@ public class Member {
 
     @Id // 최소한 Key가 무엇인지 알려줘야한다.
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.AUTO)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "member_seq_generator")
 //    @GeneratedValue(strategy = GenerationType.TABLE, generator = "member_seq_generator")
     private Long id;
 
-    @Id
     private String name;
 
     private Integer age;
@@ -52,7 +52,7 @@ public class Member {
     public static LinkedList<Member> createMembers() {
         LinkedList<Member> resultList = new LinkedList<>();
 
-        for(int i = 0; i < 1; i++) {
+        for(int i = 0; i < 75; i++) {
             resultList.add(random());
         }
 

@@ -1,10 +1,10 @@
-package org.example;
+package org.example.entity_mapping;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
-import org.example.model.Member;
+import org.example.entity_mapping.model.Member;
 
 import java.util.LinkedList;
 import java.util.List;
