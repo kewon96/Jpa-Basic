@@ -16,11 +16,15 @@ public class RelationMappingMember {
     @Column(name = "username")
     private String username;
 
-    @Column(name = "team_id")
-    private Long teamId;
+//    @Column(name = "team_id")
+//    private Long teamId;
 
-    public RelationMappingMember(String username, Long teamId) {
+    @ManyToOne
+    @JoinColumn(name = "team_id")
+    private Team team;
+
+    public RelationMappingMember(String username, Team team) {
         this.username = username;
-        this.teamId = teamId;
+        this.team = team;
     }
 }

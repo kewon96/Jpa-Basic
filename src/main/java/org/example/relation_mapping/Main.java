@@ -7,8 +7,6 @@ import jakarta.persistence.Persistence;
 import org.example.relation_mapping.model.RelationMappingMember;
 import org.example.relation_mapping.model.Team;
 
-import java.lang.reflect.Member;
-
 public class Main {
     public static void main(String[] args) {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("hello");
@@ -20,7 +18,8 @@ public class Main {
 
         try {
 
-            doit(manager);
+//            before(manager);
+            after(manager);
 
             tx.commit();
         } catch(Exception e) {
@@ -32,15 +31,28 @@ public class Main {
         factory.close();
     }
 
-    private static void doit(EntityManager manager) {
+    private static void after(EntityManager manager) {
         Team team = new Team("team1");
         manager.persist(team);
 
-        RelationMappingMember member = new RelationMappingMember("member1", team.getId());
+        RelationMappingMember member = new RelationMappingMember("member1", team);
         manager.persist(member);
 
-        Member findMember = manager.find(Member.class, member.getId());
-        Team findTeam = manager.find(Team.class, member.getTeamId());
+        RelationMappingMember findMember = manager.find(RelationMappingMember.class, member.getId());
+        Team findTeam = findMember.getTeam();
 
+        System.out.println(findTeam);
     }
+
+//    private static void before(EntityManager manager) {
+//        Team team = new Team("team1");
+//        manager.persist(team);
+//
+//        RelationMappingMember member = new RelationMappingMember("member1", team.getId());
+//        manager.persist(member);
+//
+//        RelationMappingMember findMember = manager.find(RelationMappingMember.class, member.getId());
+//        Team findTeam = manager.find(Team.class, member.getTeamId());
+//
+//    }
 }
