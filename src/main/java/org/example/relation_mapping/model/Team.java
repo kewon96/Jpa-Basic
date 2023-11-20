@@ -1,11 +1,11 @@
 package org.example.relation_mapping.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter @NoArgsConstructor
@@ -16,6 +16,9 @@ public class Team {
     private Long id;
 
     private String name;
+
+    @OneToMany(mappedBy = "team")
+    private List<RelationMappingMember> members = new ArrayList<>();
 
     public Team(String name) {
         this.name = name;

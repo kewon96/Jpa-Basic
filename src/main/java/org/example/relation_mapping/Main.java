@@ -7,6 +7,8 @@ import jakarta.persistence.Persistence;
 import org.example.relation_mapping.model.RelationMappingMember;
 import org.example.relation_mapping.model.Team;
 
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("hello");
@@ -38,10 +40,15 @@ public class Main {
         RelationMappingMember member = new RelationMappingMember("member1", team);
         manager.persist(member);
 
+        manager.flush();
+        manager.clear();
+
         RelationMappingMember findMember = manager.find(RelationMappingMember.class, member.getId());
         Team findTeam = findMember.getTeam();
+        List<RelationMappingMember> members = findTeam.getMembers();
 
         System.out.println(findTeam);
+        System.out.println(members);
     }
 
 //    private static void before(EntityManager manager) {
