@@ -4,7 +4,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
-import org.example.entity_mapping.model.EntityMappingMember;
+import org.example.entity_mapping.model.Member1;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -50,34 +50,34 @@ public class Main {
     }
 
     private static void detachMember(EntityManager manager) {
-        EntityMappingMember entityMappingMember = manager.find(EntityMappingMember.class, 90651L);
-        entityMappingMember.setName("asf,flbj");
+        Member1 member1 = manager.find(Member1.class, 90651L);
+        member1.setName("asf,flbj");
 
-        manager.detach(entityMappingMember);
+        manager.detach(member1);
 
-        EntityMappingMember entityMappingMember1 = manager.find(EntityMappingMember.class, 90651L);
-        entityMappingMember1.setName("asf,flbj");
+        Member1 member11 = manager.find(Member1.class, 90651L);
+        member11.setName("asf,flbj");
 
     }
 
     private static void randomMember(EntityManager manager) {
-        manager.persist(EntityMappingMember.random());
+        manager.persist(Member1.random());
     }
 
     private static void dirtyChecking(EntityManager manager) {
         // 89374
 
-        EntityMappingMember entityMappingMember = manager.find(EntityMappingMember.class, 89374L);
-        System.out.println(entityMappingMember);
+        Member1 member1 = manager.find(Member1.class, 89374L);
+        System.out.println(member1);
 
-        entityMappingMember.setName("ZZZZZ");
+        member1.setName("ZZZZZ");
 
     }
 
     private static void lazyTransaction(EntityManager manager, EntityTransaction tx) {
         //엔티티 매니저는 데이터 변경시 트랜잭션을 시작해야 한다.
-        manager.persist(EntityMappingMember.random());
-        manager.persist(EntityMappingMember.random());
+        manager.persist(Member1.random());
+        manager.persist(Member1.random());
         //여기까지 INSERT SQL을 데이터베이스에 보내지 않는다.
         //커밋하는 순간 데이터베이스에 INSERT SQL을 보낸다.
     }
@@ -90,18 +90,18 @@ public class Main {
 //        manager.persist(member);
 
         //1차 캐시에서 조회
-        EntityMappingMember findEntityMappingMember1 = manager.find(EntityMappingMember.class, 3L);
-        EntityMappingMember findEntityMappingMember2 = manager.find(EntityMappingMember.class, 3L);
-        System.out.println(findEntityMappingMember1);
-        System.out.println(findEntityMappingMember2);
+        Member1 findMember11 = manager.find(Member1.class, 3L);
+        Member1 findMember12 = manager.find(Member1.class, 3L);
+        System.out.println(findMember11);
+        System.out.println(findMember12);
 
-        System.out.println(findEntityMappingMember1 == findEntityMappingMember2);
+        System.out.println(findMember11 == findMember12);
 
     }
 
-    private static List<EntityMappingMember> getMembers(EntityManager manager) {
+    private static List<Member1> getMembers(EntityManager manager) {
         // DB의 Member를 대상으로 한게 아니라 Java의 Member를 대상으로 Query를 짠다. => 객체지향 질의문
-        return manager.createQuery("SELECT m FROM EntityMappingMember as m", EntityMappingMember.class)
+        return manager.createQuery("SELECT m FROM Member1 as m", Member1.class)
                 // pagination
                 .setFirstResult(1)
                 .setMaxResults(10)
@@ -109,27 +109,27 @@ public class Main {
     }
 
     private static void update(EntityManager manager) {
-        EntityMappingMember entityMappingMember = manager.find(EntityMappingMember.class, 1L);
-        entityMappingMember.setName("helloA");
+        Member1 member1 = manager.find(Member1.class, 1L);
+        member1.setName("helloA");
 
         // 수정할 때는 persist를 작동안해도 적용된다(마치 Java-Collection을 다루는 것 처럼...)
         // commit하지 직전에 변경점을 확인 후 각 변경점들을 반영시키고(update 실행) commit을 진행시킨다.
-         manager.persist(entityMappingMember);
+         manager.persist(member1);
 
-         entityMappingMember.setName("helloAA");
+         member1.setName("helloAA");
     }
 
     private static void insert(EntityManager manager) {
-        EntityMappingMember random = EntityMappingMember.random();
+        Member1 random = Member1.random();
         manager.persist(random);
     }
 
     private static void inserts(EntityManager manager) {
-        LinkedList<EntityMappingMember> entityMappingMembers = EntityMappingMember.createMembers();
+        LinkedList<Member1> member1s = Member1.createMembers();
         System.out.println("==================");
-        entityMappingMembers.forEach(manager::persist);
+        member1s.forEach(manager::persist);
 
-        entityMappingMembers.forEach(x -> System.out.println(x.getId()));
+        member1s.forEach(x -> System.out.println(x.getId()));
         System.out.println("==================");
     }
 }

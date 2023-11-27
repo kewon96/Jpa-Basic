@@ -7,7 +7,7 @@ import lombok.*;
 @Entity
 @Table(name = "member_2")
 @Getter @Setter @NoArgsConstructor
-public class RelationMappingMember {
+public class Member2 {
 
     @Id @GeneratedValue
     @Column(name = "member_id")
@@ -23,8 +23,15 @@ public class RelationMappingMember {
     @JoinColumn(name = "team_id")
     private Team team;
 
-    public RelationMappingMember(String username, Team team) {
+    public Member2(String username, Team team) {
         this.username = username;
         this.team = team;
+
+        this.team.getMembers().add(this);
     }
+
+    public Member2(String name) {
+        this.username = name;
+    }
+
 }

@@ -26,7 +26,7 @@ import java.util.Random;
 @Getter @Setter @NoArgsConstructor
 @AllArgsConstructor @ToString
 @Builder
-public class EntityMappingMember {
+public class Member1 {
 
     @Id // 최소한 Key가 무엇인지 알려줘야한다.
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,8 +49,8 @@ public class EntityMappingMember {
     @Lob
     private String description;
 
-    public static LinkedList<EntityMappingMember> createMembers() {
-        LinkedList<EntityMappingMember> resultList = new LinkedList<>();
+    public static LinkedList<Member1> createMembers() {
+        LinkedList<Member1> resultList = new LinkedList<>();
 
         for(int i = 0; i < 75; i++) {
             resultList.add(random());
@@ -59,14 +59,14 @@ public class EntityMappingMember {
         return resultList;
     }
 
-    public static EntityMappingMember random() {
+    public static Member1 random() {
         double random = Math.random();
 
         long id = (long) ( random * 100000 );
         String name = createName();
         int age = (int) ( random * 100);
 
-        return EntityMappingMember.builder()
+        return Member1.builder()
 //                .id(id + "")
                 .name(name)
                 .createdDate(LocalDateTime.now())
