@@ -23,7 +23,9 @@ public class Main {
 //            before(manager);
 //            after(manager);
 //            case1_story(manager);
-            case1_solution(manager);
+//            case1_solution(manager);
+
+            oneToMany(manager);
 
             tx.commit();
         } catch(Exception e) {
@@ -33,6 +35,20 @@ public class Main {
         }
 
         factory.close();
+    }
+
+    private static void oneToMany(EntityManager manager) {
+        Member2 member = new Member2("member1");
+        manager.persist(member);
+
+        // teamA는 그저 insert까지만 동작한다.
+        Team team = new Team("teamA");
+
+        // 하지만 이 부분에서 수정질의문이 동작하는데
+        // 이것은 DB에서 정의된 관계 상 어쩔 수 없이 수정질의문이 동작하게 된다.
+        team.getMembers().add(member);
+
+        manager.persist(team);
     }
 
     /**
@@ -109,11 +125,11 @@ public class Main {
         manager.clear();
 
         Member2 findMember = manager.find(Member2.class, member.getId());
-        Team findTeam = findMember.getTeam();
-        List<Member2> members = findTeam.getMembers();
+//        Team findTeam = findMember.getTeam();
+//        List<Member2> members = findTeam.getMembers();
 
-        System.out.println(findTeam);
-        System.out.println(members);
+//        System.out.println(findTeam);
+//        System.out.println(members);
     }
 
 //    private static void before(EntityManager manager) {

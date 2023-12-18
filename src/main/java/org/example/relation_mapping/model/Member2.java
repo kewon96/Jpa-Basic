@@ -16,12 +16,13 @@ public class Member2 {
     @Column(name = "username")
     private String username;
 
-//    @Column(name = "team_id")
-//    private Long teamId;
-
     @ManyToOne
     @JoinColumn(name = "team_id")
     private Team team;
+
+    @OneToOne
+    @JoinColumn(name = "locker_id") // joinColumn의 기본값이 있긴한데 굉장히 난해해서 직접등록하는게 이롭다.
+    private Locker locker;
 
     public Member2(String username, Team team) {
         this.username = username;
