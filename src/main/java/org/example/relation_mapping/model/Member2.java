@@ -30,6 +30,7 @@ public class Member2 {
 //    @ManyToMany
 //    @JoinTable(name = "member_product")
 //    private List<Product> products = new ArrayList<>();
+
     @OneToMany
     private List<MemberProduct> products = new ArrayList<>();
 
