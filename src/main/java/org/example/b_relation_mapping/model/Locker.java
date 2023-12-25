@@ -1,4 +1,4 @@
-package org.example.relation_mapping.model;
+package org.example.b_relation_mapping.model;
 
 import jakarta.persistence.*;
 

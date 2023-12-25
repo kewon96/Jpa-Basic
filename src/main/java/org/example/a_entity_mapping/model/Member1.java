@@ -1,4 +1,4 @@
-package org.example.entity_mapping.model;
+package org.example.a_entity_mapping.model;
 
 import jakarta.persistence.*;
 import lombok.*;

@@ -1,11 +1,11 @@
-package org.example.relation_mapping;
+package org.example.b_relation_mapping;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
-import org.example.relation_mapping.model.Member2;
-import org.example.relation_mapping.model.Team;
+import org.example.b_relation_mapping.model.Member2;
+import org.example.b_relation_mapping.model.Team;
 
 import java.util.List;
 

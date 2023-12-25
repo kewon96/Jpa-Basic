@@ -1,4 +1,4 @@
-package org.example.relation_mapping.model;
+package org.example.b_relation_mapping.model;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -26,10 +26,6 @@ public class Member2 {
     @OneToOne
     @JoinColumn(name = "locker_id") // joinColumn의 기본값이 있긴한데 굉장히 난해해서 직접등록하는게 이롭다.
     private Locker locker;
-
-//    @ManyToMany
-//    @JoinTable(name = "member_product")
-//    private List<Product> products = new ArrayList<>();
 
     @OneToMany
     private List<MemberProduct> products = new ArrayList<>();
