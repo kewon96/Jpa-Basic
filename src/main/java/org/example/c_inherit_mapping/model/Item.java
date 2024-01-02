@@ -6,9 +6,9 @@ import lombok.NoArgsConstructor;
 
 @Getter @NoArgsConstructor
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@DiscriminatorColumn
-public abstract class Item {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//@DiscriminatorColumn
+public class Item extends BaseEntity {
 
     @Id @GeneratedValue
     private Long id;
