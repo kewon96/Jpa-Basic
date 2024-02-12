@@ -5,11 +5,11 @@
     <persistence-unit name="hello">
         <properties>
             <!-- 필수 속성 -->
-            <property name="javax.persistence.jdbc.driver" value="org.mariadb.jdbc.Driver"/>
-            <property name="javax.persistence.jdbc.user" value="user1"/>
-            <property name="javax.persistence.jdbc.password" value="1111"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mariadb://localhost:3306/jpa-study"/>
-            <property name="hibernate.dialect" value="org.hibernate.dialect.MariaDBDialect"/>
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="javax.persistence.jdbc.user" value=""/>
+            <property name="javax.persistence.jdbc.password" value=""/>
+            <property name="javax.persistence.jdbc.url" value=""/>
+<!--            <property name="hibernate.dialect" value="org.hibernate.dialect.MariaDBDialect"/>-->
 
             <!-- 옵션 -->
             <property name="hibernate.show_sql" value="true"/>
@@ -18,7 +18,7 @@
             <property name="hibernate.jdbc.batch_size" value="10"/> <!-- 10이라는 사이즈를 모아서 DB에 한방에 넣고 commit -->
             <property name="hibernate.physical_naming_strategy" value="org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy"/>
 
-<!--            <property name="hibernate.hbm2ddl.auto" value="update" />-->
+            <property name="hibernate.hbm2ddl.auto" value="create-drop" />
         </properties>
     </persistence-unit>
 </persistence>
