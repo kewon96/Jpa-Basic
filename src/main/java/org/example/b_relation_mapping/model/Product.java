@@ -6,8 +6,8 @@ import lombok.Getter;
 import java.util.ArrayList;
 import java.util.List;
 
+//@Entity
 @Getter
-@Entity
 public class Product {
 
     @Id @GeneratedValue

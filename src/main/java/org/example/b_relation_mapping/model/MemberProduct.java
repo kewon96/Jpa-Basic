@@ -5,7 +5,7 @@ import lombok.Getter;
 
 import java.time.LocalDateTime;
 
-@Entity
+//@Entity
 @Getter
 public class MemberProduct {
 

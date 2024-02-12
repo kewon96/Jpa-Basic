@@ -9,14 +9,14 @@ import java.util.Random;
 
 
 // JPA 내부적으로 리플렉션을 쓰기때문에 기본생성자가 있어야한다.(public일 필요는 없음)
-@Entity
-@Table(name="member_1")
-@SequenceGenerator(
-        name = "member_seq_generator",
-        sequenceName = "member_seq",
-        initialValue = 1,
-        allocationSize = 50
-)
+//@Entity
+//@Table(name="member_1")
+//@SequenceGenerator(
+//        name = "member_seq_generator",
+//        sequenceName = "member_seq",
+//        initialValue = 1,
+//        allocationSize = 50
+//)
 //@TableGenerator(
 //        name = "member_seq_generator",
 //        table = "member_sequence",

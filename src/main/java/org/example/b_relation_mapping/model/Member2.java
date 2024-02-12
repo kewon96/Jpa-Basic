@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@Entity
-@Table(name = "member_2")
+//@Entity
+//@Table(name = "member_2")
 @Getter @Setter @NoArgsConstructor
 public class Member2 {
 

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+//@Entity
 @Getter @NoArgsConstructor
 public class Team {
 

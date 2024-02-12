@@ -4,8 +4,8 @@ import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+//@Entity
 @Getter @NoArgsConstructor
-@Entity
 public class Movie extends Item {
 
     private String director;
