@@ -6,8 +6,8 @@ import lombok.*;
 import java.util.Objects;
 
 
-@Entity
-@Table(name = "member_3")
+//@Entity
+//@Table(name = "member_3")
 @Getter @Setter @NoArgsConstructor @ToString
 public class Member3 {
 

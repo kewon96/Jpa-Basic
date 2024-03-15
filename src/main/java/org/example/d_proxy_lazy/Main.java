@@ -4,10 +4,13 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
+import org.example.a_entity_mapping.model.Member1;
 import org.example.d_proxy_lazy.model.ChildEntity;
 import org.example.d_proxy_lazy.model.Member3;
 import org.example.d_proxy_lazy.model.ParentEntity;
 import org.example.d_proxy_lazy.model.Team2;
+
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -52,10 +55,10 @@ public class Main {
         manager.flush();
         manager.clear();
 
-        ParentEntity findParent = manager.find(ParentEntity.class, parent.getId());
-        findParent.getChildEntityList().remove(0);
+        List<ParentEntity> resultList = manager.createQuery("SELECT p FROM ParentEntity as p", ParentEntity.class).getResultList();
+//        findParent.getChildEntityList().remove(0);
 
-        manager.persist(findParent);
+        manager.remove(resultList.get(0));
 //            manager.persist(child1);
 //            manager.persist(child2);
     }
